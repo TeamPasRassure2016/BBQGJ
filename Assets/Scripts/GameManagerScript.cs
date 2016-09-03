@@ -73,4 +73,5 @@ public class GameManagerScript : MonoBehaviour {
 	void GameOver() {
 		GOScreen.SetActive(true);
 	}
+
 }
