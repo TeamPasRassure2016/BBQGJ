@@ -12,6 +12,7 @@ public struct Rectangle {
 
 [System.Serializable]
 public struct Circle {
+    [Range(1f, 10f)]
     public float radius;
 }
 
@@ -34,13 +35,21 @@ public class CrowdManager : MonoBehaviour {
     // Private fields
     GameObject crowdRoot;
     Protester[] protesters;
+    const int maxGenAttempts = 30;
     int population = 0;
+
+    /* If the generation settings are too tough (and as a result, would block the generation),
+     * then this dirty hack is set to true, and the generation algorithm will give up.
+     */
+
+    bool settingsAreShit = false;
 
 	void Awake () {
         crowdRoot = GameObject.FindGameObjectWithTag (crowdRootTag);
 	}
 
     public void PopulateCrowd() {
+        settingsAreShit = false;
         PopulateCrowdCoroutine();
     }
 
@@ -51,6 +60,8 @@ public class CrowdManager : MonoBehaviour {
         protesters = new Protester[parameters.crowdSize];
         for(int i = 0 ; i != parameters.crowdSize ; ++i) {
             SpawnProtester (i);
+            if (settingsAreShit)
+                return;
         }
         Debug.Log ("Crowd generation complete!");
     }
@@ -66,12 +77,14 @@ public class CrowdManager : MonoBehaviour {
     }
 
     void SpawnProtester(int idx) {
-        float timeLimit = 2f, tStart = Time.time;
         Vector2 pos = new Vector2();
+        int attempt = 0;
         do {
             // Check that the generation isn't stuck
-            if(Time.time > (tStart + timeLimit)) {
+            float t = Time.time;
+            if(attempt > maxGenAttempts) {
                 Debug.LogError ("Crowd generation taking too long, aborting");
+                settingsAreShit = true;
                 return;
             }
 
@@ -85,6 +98,7 @@ public class CrowdManager : MonoBehaviour {
                     Random.Range(parameters.rectangle.bottomRight.y, parameters.rectangle.topLeft.y));
                 break;
             }
+            ++attempt;
         } while (!CheckSpawnCoords (pos));
         Protester newProt = GameObject.Instantiate (protesterPrefab, crowdRoot.transform) as Protester;
         newProt.transform.position = Protester.TopVec2ToVec3 (pos) + new Vector3(0, 0.5f, 0);

@@ -13,6 +13,7 @@ public class GameManagerScript : MonoBehaviour {
 	public int PeopleCount;
 	public GameObject CRSprefab;
 	public GameObject GOScreen;
+    public LevelManager levelManager;
 
 	private int CrsCount;
 	private float timer;
@@ -23,6 +24,8 @@ public class GameManagerScript : MonoBehaviour {
 		SetCrsText();
 		LevelText.text = "Level " + currentLevel.ToString();
 		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
+
+        levelManager.Generate ();
 	}
 	
 	// Update is called once per frame
