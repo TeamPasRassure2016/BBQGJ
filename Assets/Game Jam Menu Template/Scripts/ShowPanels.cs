@@ -6,6 +6,7 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject optionsPanel;							//Store a reference to the Game Object OptionsPanel 
 	public GameObject optionsTint;							//Store a reference to the Game Object OptionsTint 
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
+    public GameObject creditsPanel;                         //Store a reference to the Game Object CreditsPanel
 	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
 
 
@@ -34,6 +35,20 @@ public class ShowPanels : MonoBehaviour {
 	{
 		menuPanel.SetActive (false);
 	}
+
+    //Call this function to activate and display the Credits panel during the main menu
+    public void ShowCreditsPanel()
+    {
+        menuPanel.SetActive (false);
+        creditsPanel.SetActive (true);
+    }
+
+    //Call this function to deactivate and hide the Credits panel during the main menu
+    public void HideCreditsPanel()
+    {
+        creditsPanel.SetActive (false);
+        menuPanel.SetActive (true);
+    }
 	
 	//Call this function to activate and display the Pause panel during game play
 	public void ShowPausePanel()

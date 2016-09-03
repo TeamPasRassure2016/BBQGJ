@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum Shape {
+    Circle, Rectangle
+}
+
 [System.Serializable]
 public struct Rectangle {
     public Vector2 topLeft, bottomRight;
@@ -8,82 +12,93 @@ public struct Rectangle {
 
 [System.Serializable]
 public struct Circle {
+    [Range(1f, 10f)]
     public float radius;
 }
 
 public class CrowdManager : MonoBehaviour {
-    public enum CrowdShape {
-        Circle, Rectangle
+    [System.Serializable]
+    public struct Params {
+        public Shape crowdShape;
+        public int crowdSize;
+        public Rectangle rectangle;
+        public Circle circle;
     }
-
+        
     // Constants
-    const string crowdRootTag = "CrowdRoot";
+    public const string crowdRootTag = "CrowdRoot";
 
     // Public fields
-    public CrowdShape crowdShape = CrowdShape.Circle;
-    public int crowdSize = 15;
-    public Rectangle rectangle;
-    public Circle circle;
+    public Params parameters;
     public Protester protesterPrefab;
 
     // Private fields
     GameObject crowdRoot;
-    System.Random rng;
     Protester[] protesters;
+    const int maxGenAttempts = 30;
     int population = 0;
+
+    /* If the generation settings are too tough (and as a result, would block the generation),
+     * then this dirty hack is set to true, and the generation algorithm will give up.
+     */
+
+    bool settingsAreShit = false;
 
 	void Awake () {
         crowdRoot = GameObject.FindGameObjectWithTag (crowdRootTag);
-        rng = new System.Random ();
 	}
 
     public void PopulateCrowd() {
-        StartCoroutine (PopulateCrowdCoroutine());
+        settingsAreShit = false;
+        PopulateCrowdCoroutine();
     }
 
-    public IEnumerator PopulateCrowdCoroutine() {
+    public void PopulateCrowdCoroutine() {
         if(population > 0) {
             ClearCrowd ();
         }
-        protesters = new Protester[crowdSize];
-        for(int i = 0 ; i != crowdSize ; ++i) {
+        protesters = new Protester[parameters.crowdSize];
+        for(int i = 0 ; i != parameters.crowdSize ; ++i) {
             SpawnProtester (i);
-            Debug.Log ("Spawned protester" + (i + 1));
+            if (settingsAreShit)
+                return;
         }
         Debug.Log ("Crowd generation complete!");
-        yield return null;
     }
 	
     public void ClearCrowd() {
         Debug.Log ("Started clearing crowd...");
         for(int i = 0 ; i != population ; ++i) {
-            Debug.Log ("Deleting " + protesters[i]);
             GameObject.Destroy (protesters[i].gameObject);
             protesters [i] = null;
         }
         population = 0;
+        Debug.Log ("Crowd deletion complete!");
     }
 
     void SpawnProtester(int idx) {
-        float timeLimit = 2f, tStart = Time.time;
         Vector2 pos = new Vector2();
+        int attempt = 0;
         do {
             // Check that the generation isn't stuck
-            if(Time.time > (tStart + timeLimit)) {
+            float t = Time.time;
+            if(attempt > maxGenAttempts) {
                 Debug.LogError ("Crowd generation taking too long, aborting");
+                settingsAreShit = true;
                 return;
             }
 
             // Generate spawn coordinates
-            switch(crowdShape) {
-            case CrowdShape.Circle:
-                pos = Random.insideUnitCircle * circle.radius;
+            switch(parameters.crowdShape) {
+            case Shape.Circle:
+                pos = Random.insideUnitCircle * parameters.circle.radius;
                 break;
-            case CrowdShape.Rectangle:
-                pos = new Vector2(Random.Range(rectangle.topLeft.x, rectangle.bottomRight.x),
-                    Random.Range(rectangle.bottomRight.y, rectangle.topLeft.y));
+            case Shape.Rectangle:
+                pos = new Vector2(Random.Range(parameters.rectangle.topLeft.x, parameters.rectangle.bottomRight.x),
+                    Random.Range(parameters.rectangle.bottomRight.y, parameters.rectangle.topLeft.y));
                 break;
             }
+            ++attempt;
         } while (!CheckSpawnCoords (pos));
         Protester newProt = GameObject.Instantiate (protesterPrefab, crowdRoot.transform) as Protester;
         newProt.transform.position = Protester.TopVec2ToVec3 (pos) + new Vector3(0, 0.5f, 0);
@@ -102,9 +117,9 @@ public class CrowdManager : MonoBehaviour {
     }
 
     void OnDrawGizmos() {
-        if (crowdShape == CrowdShape.Circle) {
+        if (parameters.crowdShape == Shape.Circle) {
             Gizmos.color = new Color (0, 1, 0, 0.2f);
-            Gizmos.DrawSphere (Vector3.zero, circle.radius);
+            Gizmos.DrawSphere (Vector3.zero, parameters.circle.radius);
         }
     }
 }

@@ -11,8 +11,13 @@ public class GameManagerScript : MonoBehaviour {
 
 	public int currentLevel = 1;
 	public int PeopleCount;
+
 	public GameObject CRS_Controller;
 	public GameObject CRS_Arrow;
+
+	public GameObject CRSprefab;
+	public GameObject GOScreen;
+    public LevelManager levelManager;
 
 	private GameObject InstantiatedArrow; //too lazy for script
 
@@ -29,6 +34,8 @@ public class GameManagerScript : MonoBehaviour {
 		SetCrsText();
 		LevelText.text = "Level " + currentLevel.ToString();
 		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
+
+        levelManager.Generate ();
 	}
 	
 	// Update is called once per frame
@@ -38,6 +45,10 @@ public class GameManagerScript : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown (0) || mouseDown) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+
+			// Timer Update
+			SetTime();
+		
 			RaycastHit hit;
 
 			Vector3 pos = Input.mousePosition;
@@ -74,6 +85,11 @@ public class GameManagerScript : MonoBehaviour {
 			mouseDown = false;
 		}
 
+		// Game Over check
+		if (CrsCount == 0) {
+			GameOver();
+		}
+
 	}
 
 	void SetCrsText (){
@@ -88,4 +104,9 @@ public class GameManagerScript : MonoBehaviour {
 
 		TimerText.text = string.Format ("{0:00} : {1:00}", minutes, seconds);
 	}
+
+	void GameOver() {
+		GOScreen.SetActive(true);
+	}
+
 }
