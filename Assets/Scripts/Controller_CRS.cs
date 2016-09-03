@@ -7,9 +7,8 @@ public class Controller_CRS : MonoBehaviour
 	public float m_velocity; //in units per frame
 
 	public int m_CRSCounter; //number of CRS left
-	public int m_framesCounter; //counts the number of frames before the next spawn
+	public int m_framesCounter; //counts the number of frames before the next spawn (replaced by chunks of 0.1 seconds)
 	public GameObject m_CRSObject; //CRS prefab to be spawned
-	public GameObject m_CRSTrigger; //Trigger for Controller behavior
 
 	public bool m_isActive; //Whether the spawner is active or not (spawns CRS)
 
@@ -17,33 +16,24 @@ public class Controller_CRS : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		m_isActive = false;
+		m_isActive = true;
 		m_framesCounter = 0;
 
 		//DEBUG//
-		Move(new Vector3(-15.0f, 0.5f, -15.0f), new Vector3(1.0f, 0.0f, 1.0f));
+		Vector3 d=new Vector3(1.0f, 0.0f, 1.0f);
+		d.Normalize ();
+		Move(gameObject.transform.position, d);
 		//END DEBUG//
-	}
-
-	void OnTriggerEnter(Collider other) 
-	{
-		if (other.gameObject == m_CRSTrigger.gameObject) 
-		{
-			m_isActive = true;
-		}
-	}
-
-	void OnTriggerExit(Collider other)
-	{
-		if (other.gameObject == m_CRSTrigger.gameObject) 
-		{
-			m_isActive = false;
-			Stop ();
-		}
+		InvokeRepeating("UpdateTime", 0.03F, 0.03F);
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
+	{
+		
+	}
+
+	void UpdateTime()
 	{
 		if (m_isActive) 
 		{

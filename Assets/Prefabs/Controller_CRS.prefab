@@ -22,8 +22,8 @@ GameObject:
   - 33: {fileID: 33000010360310826}
   - 65: {fileID: 65000012600059744}
   - 23: {fileID: 23000012150145716}
-  - 114: {fileID: 114000012855131012}
   - 54: {fileID: 54000010933084004}
+  - 114: {fileID: 114000010929412458}
   m_Layer: 0
   m_Name: Controller_CRS
   m_TagString: Untagged
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012833953968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6786251, y: 0.63376474, z: -0.59038264}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 84c96f22930babd4b836ed183c91f74f, type: 2}
+  - {fileID: 2100000, guid: adb5838470f55324ca77ac61b1c9cb77, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -91,7 +91,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -102,12 +102,12 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012833953968}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000012855131012
+--- !u!114 &114000010929412458
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -115,13 +115,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012833953968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 748c3eda953127b418d567ddff11ddba, type: 3}
+  m_Script: {fileID: 11500000, guid: 9328198e15c710f498162f92bf78176f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_framesBetweenSpawns: 60
-  m_velocity: 1
-  m_CRSCounter: 100
+  m_framesBetweenSpawns: 5
+  m_velocity: 5
+  m_CRSCounter: 50
   m_framesCounter: 0
-  m_CRSObject: {fileID: 1000011633967428, guid: c811019f5d9356f42bd391a08aae8d02,
+  m_CRSObject: {fileID: 1000013297548052, guid: 472b9355d2a3f674d8243ba947800e06,
     type: 2}
-  m_CRSTrigger: {fileID: 0}
+  m_isActive: 0
