@@ -11,14 +11,15 @@ public class GameManagerScript : MonoBehaviour {
 
 	public int currentLevel = 1;
 	public int PeopleCount;
-	public GameObject prefab;
+	public GameObject CRSprefab;
+	public GameObject GOScreen;
 
 	private int CrsCount;
 	private float timer;
 
 	// Use this for initialization
 	void Start () {
-		CrsCount = 0;
+		CrsCount = 5;
 		SetCrsText();
 		LevelText.text = "Level " + currentLevel.ToString();
 		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
@@ -26,9 +27,12 @@ public class GameManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		SetTime();
 
-		 if (Input.GetMouseButtonDown(0)) 
+		// Timer Update
+		SetTime();
+		
+		// Mouse Click check
+		if (Input.GetMouseButtonDown(0)) 
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
@@ -37,11 +41,18 @@ public class GameManagerScript : MonoBehaviour {
 			pos = Camera.main.ScreenToWorldPoint(pos);
 			Debug.Log(pos);
 
-			if (Physics.Raycast(ray, out hit))
+			if (Physics.Raycast(ray, out hit) && CrsCount > 0)
 			{
 				// ici instantier la colonne de CRS avec pour pts de départ (hit.point.x, 0.5f , hit.point.z)
-				Instantiate(prefab, new Vector3(hit.point.x, 0.5f , hit.point.z), Quaternion.identity);
+				Instantiate(CRSprefab, new Vector3(hit.point.x, 0.5f , hit.point.z), Quaternion.identity);
+				CrsCount = CrsCount - 1;
+				SetCrsText();
 			}
+		}
+
+		// Game Over check
+		if (CrsCount == 0) {
+			GameOver();
 		}
 
 	}
@@ -57,5 +68,9 @@ public class GameManagerScript : MonoBehaviour {
 		float seconds = timer % 60;
 
 		TimerText.text = string.Format ("{0:00} : {1:00}", minutes, seconds);
+	}
+
+	void GameOver() {
+		GOScreen.SetActive(true);
 	}
 }
