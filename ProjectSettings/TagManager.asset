@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CrowdRoot
+  - CRS_static
   layers:
   - Default
   - TransparentFX
