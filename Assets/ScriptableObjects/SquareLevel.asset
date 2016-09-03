@@ -11,18 +11,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7786928c9b9234a419fb7dace21fea66, type: 3}
   m_Name: SquareLevel
   m_EditorClassIdentifier: 
-  size: 0
-  width: 10
-  height: 10
+  size: 2
+  width: 45
+  height: 30
+  radius: 10
   protesterPrefab: {fileID: 114000010094236440, guid: 8aed2c60aed1148178bc770a1e02bc4b,
+    type: 2}
+  copPrefab: {fileID: 114000013134705978, guid: 472b9355d2a3f674d8243ba947800e06,
     type: 2}
   crowdManagerPrefab: {fileID: 114000011041626578, guid: 0f67cdec46875462ba26512440fe8ead,
     type: 2}
   crowdParameters:
-    crowdShape: 0
+    crowdShape: 1
     crowdSize: 10
     rectangle:
-      topLeft: {x: -4, y: 4}
-      bottomRight: {x: 4, y: -4}
+      topLeft: {x: -10, y: 10}
+      bottomRight: {x: 10, y: -10}
     circle:
-      radius: 4
+      radius: 8
+  levelShape: 1
