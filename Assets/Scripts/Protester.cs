@@ -10,31 +10,31 @@ public class Protester : MonoBehaviour {
 
     Rigidbody rigidBody;
     float lastMove;
-	System.Random rng;
-	Vector2 direction;
+    System.Random rng;
+    Vector2 direction;
 
-	void Awake () {
-	    rigidBody = GetComponent<Rigidbody>();
-		rng = new System.Random ();
-		direction = UnityEngine.Random.insideUnitCircle.normalized;
-		lastMove = Time.time;
-	}
+    void Awake () {
+        rigidBody = GetComponent<Rigidbody>();
+        rng = new System.Random ();
+        direction = UnityEngine.Random.insideUnitCircle.normalized;
+        lastMove = Time.time;
+    }
 
-	void FixedUpdate () {
-		if(Time.time - lastMove > moveCycleDuration) {
-			lastMove = Time.time;
-			if (rng.NextDouble() < directionChangeProbability) {
-				direction = UnityEngine.Random.insideUnitCircle.normalized;
-			}
+    void FixedUpdate () {
+        if(Time.time - lastMove > moveCycleDuration) {
+            lastMove = Time.time;
+            if (rng.NextDouble() < directionChangeProbability) {
+                direction = UnityEngine.Random.insideUnitCircle.normalized;
+            }
         }
-		rigidBody.AddForce (Direction2DTo3D (direction));
-	}
+        rigidBody.AddForce (Direction2DTo3D (direction));
+    }
 
-	void OnDrawGizmos() {
-		Gizmos.DrawLine(transform.position, transform.position + Direction2DTo3D(direction));
-	}
+    void OnDrawGizmos() {
+        Gizmos.DrawLine(transform.position, transform.position + Direction2DTo3D(direction));
+    }
 
-	static Vector3 Direction2DTo3D(Vector2 dir) {
-		return new Vector3 (dir.x, 0, dir.y);
-	}
+    static Vector3 Direction2DTo3D(Vector2 dir) {
+        return new Vector3 (dir.x, 0, dir.y);
+    }
 }
