@@ -11,14 +11,21 @@ public class GameManagerScript : MonoBehaviour {
 
 	public int currentLevel = 1;
 	public int PeopleCount;
-	public GameObject prefab;
+	public GameObject CRS_Controller;
+	public GameObject CRS_Arrow;
 
-	private int CrsCount;
-	private float timer;
+	private GameObject InstantiatedArrow; //too lazy for script
+
+	public int CrsCount;
+	public float timer;
+
+	private bool mouseDown;
+	private Vector2 lastMousePosition;
+	private Vector2 instantiatePosition;
 
 	// Use this for initialization
 	void Start () {
-		CrsCount = 0;
+		CrsCount = 50;
 		SetCrsText();
 		LevelText.text = "Level " + currentLevel.ToString();
 		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
@@ -26,22 +33,45 @@ public class GameManagerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		SetCrsText();
 		SetTime();
 
-		 if (Input.GetMouseButtonDown(0)) 
-		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if (Input.GetMouseButtonDown (0) || mouseDown) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;
 
 			Vector3 pos = Input.mousePosition;
-			pos = Camera.main.ScreenToWorldPoint(pos);
-			Debug.Log(pos);
+			pos = Camera.main.ScreenToWorldPoint (pos);
+			Debug.Log (pos);
 
-			if (Physics.Raycast(ray, out hit))
-			{
+			if (Physics.Raycast (ray, out hit)) {
 				// ici instantier la colonne de CRS avec pour pts de départ (hit.point.x, 0.5f , hit.point.z)
-				Instantiate(prefab, new Vector3(hit.point.x, 0.5f , hit.point.z), Quaternion.identity);
+				if (!mouseDown) {
+					InstantiatedArrow = Instantiate (CRS_Arrow, new Vector3 (hit.point.x, 0.1f, hit.point.z), Quaternion.LookRotation (new Vector3 (0, 1, 0), new Vector3 (1, 0, 0))) as GameObject;
+					mouseDown = true;
+					instantiatePosition = new Vector2 (hit.point.x, hit.point.z);
+					lastMousePosition = new Vector2 (hit.point.x + 1, hit.point.z);
+				} else if (mouseDown) {
+					//instantiatedarrow shouldn't be null
+					Vector2 nextMousePosition = new Vector2 (hit.point.x, hit.point.z);
+					lastMousePosition = nextMousePosition;
+					Vector2 direction = lastMousePosition - instantiatePosition;
+					direction.Normalize ();
+					Vector3 direction3 = new Vector3 (direction.x, 0, direction.y);
+					//InstantiatedArrow.gameObject.transform.Rotate (new Vector3 (0, 0, 1), angle);
+					InstantiatedArrow.gameObject.transform.rotation=Quaternion.LookRotation (new Vector3 (0, 1, 0), direction3);
+				}
 			}
+		} 
+		if (Input.GetMouseButtonUp (0)) 
+		{
+			GameObject instantiatedController=Instantiate (CRS_Controller) as GameObject;
+			Vector2 direction = lastMousePosition - instantiatePosition;
+			direction.Normalize ();
+			Vector3 direction3 = new Vector3 (direction.x, 0, direction.y);
+			instantiatedController.GetComponent<Controller_CRS>().Move(new Vector3(instantiatePosition.x,0.5f,instantiatePosition.y), direction3);
+			Object.Destroy (InstantiatedArrow);
+			mouseDown = false;
 		}
 
 	}

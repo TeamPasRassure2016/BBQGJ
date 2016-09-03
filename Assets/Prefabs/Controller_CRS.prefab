@@ -26,7 +26,7 @@ GameObject:
   - 114: {fileID: 114000010929412458}
   m_Layer: 0
   m_Name: Controller_CRS
-  m_TagString: Untagged
+  m_TagString: CRS_controller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,8 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_framesBetweenSpawns: 5
   m_velocity: 5
-  m_CRSCounter: 50
-  m_framesCounter: 0
   m_CRSObject: {fileID: 1000013297548052, guid: 472b9355d2a3f674d8243ba947800e06,
     type: 2}
   m_isActive: 0
+  m_tBetweenUpdates: 0.2
