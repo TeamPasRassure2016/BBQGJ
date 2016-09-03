@@ -9,55 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000013367731910}
+  m_RootGameObject: {fileID: 1000013725007740}
   m_IsPrefabParent: 1
---- !u!1 &1000013367731910
+--- !u!1 &1000013725007740
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000014256656852}
-  - 114: {fileID: 114000011041626578}
+  - 4: {fileID: 4000011713182298}
+  - 114: {fileID: 114000012326247946}
   m_Layer: 0
-  m_Name: CrowdManager
-  m_TagString: CrowdRoot
+  m_Name: LevelManager
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000014256656852
+--- !u!4 &4000011713182298
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013367731910}
+  m_GameObject: {fileID: 1000013725007740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000011041626578
+--- !u!114 &114000012326247946
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013367731910}
+  m_GameObject: {fileID: 1000013725007740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 340a51885c22e46af85f548f89aa3573, type: 3}
+  m_Script: {fileID: 11500000, guid: c35a317e0cc33491e89038e5208ad6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parameters:
-    crowdShape: 0
-    crowdSize: 0
-    rectangle:
-      topLeft: {x: 0, y: 0}
-      bottomRight: {x: 0, y: 0}
-    circle:
-      radius: 0
-  protesterPrefab: {fileID: 114000010094236440, guid: 8aed2c60aed1148178bc770a1e02bc4b,
-    type: 2}
+  levelGen: {fileID: 11400000, guid: ce73b785362b04d08be6c67e7b79ccbb, type: 2}

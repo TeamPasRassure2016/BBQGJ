@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - CrowdRoot
+  - LevelRoot
   - CRS_static
   layers:
   - Default
