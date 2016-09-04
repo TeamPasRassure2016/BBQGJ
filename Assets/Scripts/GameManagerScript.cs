@@ -17,6 +17,7 @@ public class GameManagerScript : MonoBehaviour {
 
 	public GameObject CRSprefab;
 	public GameObject GOScreen;
+	public GameObject CRSRunning;
     public LevelManager levelManager;
 
 	private GameObject InstantiatedArrow; //too lazy for script

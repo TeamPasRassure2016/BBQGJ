@@ -7,12 +7,16 @@ public class SpawnCRS : ScriptableObject {
 	public Vector3 position;
 	public GameObject prefab; //CRS prefab to be spawned
 	public GameManagerScript gm;
+
+	private GameObject instanceCRSRunning;
 	
 	private bool stop;
 
 	public IEnumerator SpawnLine() {
 
 		stop = false;
+		instanceCRSRunning = Instantiate (gm.CRSRunning, position, Quaternion.LookRotation (direction)) as GameObject;
+		instanceCRSRunning.GetComponent<Cop_running> ().MoveTowards (direction*10);
 		while (gm.CrsCount > 0 && !stop)
 		{
 			GameObject crs = (GameObject)Instantiate (prefab, position, Quaternion.LookRotation(direction));
@@ -28,11 +32,13 @@ public class SpawnCRS : ScriptableObject {
 					Debug.Log("Stop spawning");
 					// stop l'exec si c'est un cop
 					stop = true;
+					Object.Destroy (instanceCRSRunning);
 				}
 			}
 
 			yield return new WaitForSeconds(0.1f);
 		}
+
 		yield return null;
 	}
 }
