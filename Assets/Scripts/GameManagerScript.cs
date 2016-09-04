@@ -35,7 +35,7 @@ public class GameManagerScript : MonoBehaviour {
 		LevelText.text = "Level " + currentLevel.ToString();
 		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
 
-        levelManager.Generate ();
+        levelManager.Start ();
 	}
 	
 	// Update is called once per frame
