@@ -39,9 +39,7 @@ public class CrowdManager : MonoBehaviour {
     int population = 0;
 
     /* If the generation settings are too tough (and as a result, would block the generation),
-     * then this dirty hack is set to true, and the generation algorithm will give up.
-     */
-
+     * then this dirty hack is set to true, and the generation algorithm will give up. */
     bool settingsAreShit = false;
 
 	void Awake () {
@@ -68,9 +66,11 @@ public class CrowdManager : MonoBehaviour {
 	
     public void ClearCrowd() {
         Debug.Log ("Started clearing crowd...");
-        for(int i = 0 ; i != population ; ++i) {
-            GameObject.Destroy (protesters[i].gameObject);
-            protesters [i] = null;
+        for(int i = 0 ; i != protesters.Length ; ++i) {
+            if (protesters [i] != null) {
+                GameObject.Destroy (protesters [i].gameObject);
+                protesters [i] = null;
+            }
         }
         population = 0;
         Debug.Log ("Crowd deletion complete!");
@@ -106,6 +106,7 @@ public class CrowdManager : MonoBehaviour {
         population += 1;
     }
 
+    // Return true if it is possible to spawn a Protester at the given coordinates
     bool CheckSpawnCoords(Vector2 pos) {
         Vector3 pos3D = Protester.TopVec2ToVec3 (pos);
         for(int i = 0 ; i != population ; ++i) {

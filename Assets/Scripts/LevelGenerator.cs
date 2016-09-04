@@ -70,6 +70,8 @@ public class LevelGenerator : ScriptableObject {
                 copTop.transform.position = new Vector3 (-x + i * copDistance, 0f, y);
                 copBot.transform.position = new Vector3 (-x + i * copDistance, 0f, -y);
             }
+
+            // Then, the vertical ones
             for(int i = 0 ; i != nCopsY ; ++i) {
                 Cop copL = (Cop)GameObject.Instantiate (copPrefab, root.transform),
                     copR = (Cop)GameObject.Instantiate (copPrefab, root.transform);
@@ -90,7 +92,8 @@ public class LevelGenerator : ScriptableObject {
 
         // Delete all level objects
         foreach(Transform t in root.transform) {
-            GameObject.Destroy (t.gameObject);
+            if(t.tag != CrowdManager.crowdRootTag)
+                GameObject.Destroy (t.gameObject);
         }
 
         Debug.Log ("Cleared level");
