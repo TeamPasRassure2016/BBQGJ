@@ -32,8 +32,9 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        LevelText.text = "Level " + (levelManager.currentLevel + 1).ToString ();
-		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
+		SetCrsText();
+		LevelText.text = currentLevel.ToString();
+		PeopleText.text = PeopleCount.ToString();
 
         levelManager.Start ();
         CrsCount = levelManager.levelSeq.levels[levelManager.currentLevel].nCops;
@@ -60,7 +61,7 @@ public class GameManagerScript : MonoBehaviour {
 			pos.y = 1f; 
 
 			// cherche tous les obj autour de la pos
-			Collider[] hitColliders = Physics.OverlapSphere(pos, 0.3f); // (pos , rayon de la sphere)
+			Collider[] hitColliders = Physics.OverlapSphere(pos, 0.4f); // (pos , rayon de la sphere)
 			
 			// cherche si on a click sur un cop
 			foreach (Collider c in hitColliders)
@@ -74,7 +75,7 @@ public class GameManagerScript : MonoBehaviour {
 
 			if (Physics.Raycast (ray, out hit)) {
 				
-				if (!mouseDown) {
+				if (!mouseDown && validSpawn) {
 					// la fleche
 					InstantiatedArrow = Instantiate (CRS_Arrow, new Vector3 (hit.point.x, 0.1f, hit.point.z), Quaternion.LookRotation (new Vector3 (0, 1, 0), new Vector3 (1, 0, 0))) as GameObject;
 					mouseDown = true;
@@ -145,7 +146,7 @@ public class GameManagerScript : MonoBehaviour {
     }
 
 	void SetCrsText (){
-		CrsText.text = "CRS restants : " + CrsCount.ToString();
+		CrsText.text = CrsCount.ToString();
 	}
 
 	void SetTime () {
