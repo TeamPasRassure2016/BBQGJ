@@ -10,6 +10,7 @@ public class LevelSequence : ScriptableObject {
     public Protester protesterPrefab;
     public Cop copPrefab;
     public CrowdManager crowdManagerPrefab;
+    public Terrain_Trigger groundPrefab;
 
     int currentLevel;
 
@@ -24,6 +25,7 @@ public class LevelSequence : ScriptableObject {
             level.protesterPrefab = protesterPrefab;
             level.copPrefab = copPrefab;
             level.crowdManagerPrefab = crowdManagerPrefab;
+            level.groundPrefab = groundPrefab;
         }
     }
 }
