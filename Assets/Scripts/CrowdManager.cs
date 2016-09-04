@@ -22,6 +22,7 @@ public class CrowdManager : MonoBehaviour {
         public int crowdSize;
         public Rectangle rectangle;
         public Circle circle;
+        public Material[] SwapColor; 
     }
         
     // Constants
@@ -102,6 +103,8 @@ public class CrowdManager : MonoBehaviour {
 
         // Actually spawn the Protester
         Protester newProt = GameObject.Instantiate (protesterPrefab, crowdRoot.transform) as Protester;
+
+        newProt.transform.GetChild(1).GetComponent<Renderer>().material = parameters.SwapColor[Random.Range(0,3)];
         newProt.transform.position = Protester.TopVec2ToVec3 (pos) + new Vector3(0, 0.5f, 0);
         protesters [idx] = newProt;
         population += 1;

@@ -12,7 +12,7 @@ public class SpawnCRS : ScriptableObject {
 	private bool stop;
 	private GameObject instanceCRSRunning;
 	public IEnumerator SpawnLine() {
-
+		GameObject.Find("Audio Source (grr)").GetComponent<AudioSource>().Play();
 		stop = false;
 		position = position + 1f * (direction);
 		instanceCRSRunning = Instantiate (prefab, position, Quaternion.LookRotation (direction)) as GameObject;
@@ -38,6 +38,13 @@ public class SpawnCRS : ScriptableObject {
 					Debug.Log("Stop spawning");
 					// stop l'exec si c'est un cop
 					stop = true;
+					float audio1Volume = 0.6f;
+					if(GameObject.Find("Audio Source (grr)").GetComponent<AudioSource>().volume  > 0.1)
+					{
+						audio1Volume -= 0.2f * Time.deltaTime;
+						GameObject.Find("Audio Source (grr)").GetComponent<AudioSource>().volume = audio1Volume;
+					}
+					
 					Object.Destroy (instanceCRSRunning);
 				}
 			}

@@ -8,6 +8,7 @@ public class Cop : MonoBehaviour {
         if(col.gameObject.name == "Protester(Clone)")
         {
             gameObject.GetComponent<Animator>().SetBool("tape", true);
+            gameObject.GetComponent<AudioSource>().Play();
         }
     }
     void OnCollisionExit (Collision col)
