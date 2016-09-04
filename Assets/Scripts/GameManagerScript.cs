@@ -33,8 +33,8 @@ public class GameManagerScript : MonoBehaviour {
 	void Start () {
 		CrsCount = 50;
 		SetCrsText();
-		LevelText.text = "Level " + currentLevel.ToString();
-		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
+		LevelText.text = currentLevel.ToString();
+		PeopleText.text = PeopleCount.ToString();
 
         levelManager.Start ();
 	}
@@ -123,7 +123,7 @@ public class GameManagerScript : MonoBehaviour {
 	}
 
 	void SetCrsText (){
-		CrsText.text = "CRS restants : " + CrsCount.ToString();
+		CrsText.text = CrsCount.ToString();
 	}
 
 	void SetTime () {

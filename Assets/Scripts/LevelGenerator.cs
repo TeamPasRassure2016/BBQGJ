@@ -4,9 +4,9 @@ using System.Collections;
 [CreateAssetMenu(menuName = "Custom/Level Generator")]
 public class LevelGenerator : ScriptableObject {
     // Constants
-    const float cameraYClose = 10f;
-    const float cameraYMedium = 20f;
-    const float cameraYFar = 30f;
+    const float cameraYClose = 12f;
+    const float cameraYMedium = 22f;
+    const float cameraYFar = 32f;
     const float copDistance = 1f;
 
     public enum Size {
@@ -53,8 +53,11 @@ public class LevelGenerator : ScriptableObject {
 
         // Place the camera at the appropriate position
         Camera cam = Camera.main;
-        cam.transform.position = new Vector3(0, size == Size.Small ? cameraYClose :
-            size == Size.Medium ? cameraYMedium : cameraYFar, 0);
+        cam.transform.position = new Vector3(0, 
+        size == Size.Small ? cameraYClose :
+            size == Size.Medium ? cameraYMedium : cameraYFar, 
+            size == Size.Small ? -0.5f :
+            size == Size.Medium ? -1.5f : -3.5f);
         cam.transform.localRotation = Quaternion.Euler (new Vector3 (90f, 0, 0));
 
         Debug.Log ("Level generation finished");
