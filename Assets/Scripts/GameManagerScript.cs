@@ -17,7 +17,6 @@ public class GameManagerScript : MonoBehaviour {
 
 	public GameObject CRSprefab;
 	public GameObject GOScreen;
-	public GameObject CRSRunning;
     public LevelManager levelManager;
 
 	private GameObject InstantiatedArrow; //too lazy for script
@@ -60,7 +59,7 @@ public class GameManagerScript : MonoBehaviour {
 			pos.y = 1f; 
 
 			// cherche tous les obj autour de la pos
-			Collider[] hitColliders = Physics.OverlapSphere(pos, 0.3f); // (pos , rayon de la sphere)
+			Collider[] hitColliders = Physics.OverlapSphere(pos, 0.4f); // (pos , rayon de la sphere)
 			
 			// cherche si on a click sur un cop
 			foreach (Collider c in hitColliders)

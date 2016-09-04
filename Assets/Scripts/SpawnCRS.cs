@@ -15,8 +15,15 @@ public class SpawnCRS : ScriptableObject {
 	public IEnumerator SpawnLine() {
 
 		stop = false;
-		instanceCRSRunning = Instantiate (gm.CRSRunning, position, Quaternion.LookRotation (direction)) as GameObject;
-		instanceCRSRunning.GetComponent<Cop_running> ().MoveTowards (direction*10);
+		position = position + 1f * (direction);
+		instanceCRSRunning = Instantiate (prefab, position, Quaternion.LookRotation (direction)) as GameObject;
+		instanceCRSRunning.AddComponent<Rigidbody>();
+		instanceCRSRunning.GetComponent<BoxCollider>().isTrigger = true;
+		instanceCRSRunning.name = "runningCop";
+		instanceCRSRunning.GetComponent<Rigidbody>().velocity = direction*5;
+		instanceCRSRunning.GetComponent<Rigidbody>().useGravity = false;
+		instanceCRSRunning.GetComponent<Animator>().SetTrigger("charge");
+
 		while (gm.CrsCount > 0 && !stop)
 		{
 			GameObject crs = (GameObject)Instantiate (prefab, position, Quaternion.LookRotation(direction));
@@ -24,7 +31,7 @@ public class SpawnCRS : ScriptableObject {
 			--gm.CrsCount;
 
 			// check si la prochaine pos touche un cop
-			Collider[] hitColliders = Physics.OverlapSphere(position, 0.3f); // (pos , rayon de la sphere)
+			Collider[] hitColliders = Physics.OverlapSphere(position, 0.4f); // (pos , rayon de la sphere)
 			foreach (Collider c in hitColliders)
 			{
 				//Debug.Log(c.gameObject.name);
@@ -36,7 +43,7 @@ public class SpawnCRS : ScriptableObject {
 				}
 			}
 
-			yield return new WaitForSeconds(0.1f);
+			yield return new WaitForSeconds(0.2f);
 		}
 
 		yield return null;
