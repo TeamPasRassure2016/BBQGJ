@@ -65,7 +65,7 @@ public class GameManagerScript : MonoBehaviour {
 			foreach (Collider c in hitColliders)
 			{
 				//Debug.Log(c.gameObject.name);
-				if (c.gameObject.name == "CRS(Clone)" ) {
+				if (c.gameObject.name == "cop(Clone)" ) {
 					Debug.Log("Valid spawn spot");
 					validSpawn = true; 
 				}
@@ -112,6 +112,7 @@ public class GameManagerScript : MonoBehaviour {
 				StartCoroutine(line.SpawnLine());
 				validSpawn = false;
 			}
+			Object.Destroy (InstantiatedArrow);
 		}
 
 		// Game Over check

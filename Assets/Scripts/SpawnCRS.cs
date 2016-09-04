@@ -24,7 +24,7 @@ public class SpawnCRS : ScriptableObject {
 			foreach (Collider c in hitColliders)
 			{
 				//Debug.Log(c.gameObject.name);
-				if (c.gameObject.name == "CRS(Clone)" ) {
+				if (c.gameObject.name == "cop(Clone)" ) {
 					Debug.Log("Stop spawning");
 					// stop l'exec si c'est un cop
 					stop = true;
