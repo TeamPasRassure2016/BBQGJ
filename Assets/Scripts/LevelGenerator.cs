@@ -7,7 +7,7 @@ public class LevelGenerator : ScriptableObject {
     const float cameraYClose = 10f;
     const float cameraYMedium = 20f;
     const float cameraYFar = 30f;
-    const float copDistance = 2f;
+    const float copDistance = 1f;
 
     public enum Size {
         Small, Medium, Large

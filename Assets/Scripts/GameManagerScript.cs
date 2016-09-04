@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour {
 	public int currentLevel = 1;
 	public int PeopleCount;
 
-	public GameObject CRS_Controller;
+	//public GameObject CRS_Controller;
 	public GameObject CRS_Arrow;
 
 	public GameObject CRSprefab;
