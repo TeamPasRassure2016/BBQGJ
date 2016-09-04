@@ -12,7 +12,7 @@ public class LevelSequence : ScriptableObject {
     public CrowdManager crowdManagerPrefab;
     public GameObject groundPrefab;
 
-    int currentLevel;
+    public int currentLevel;
 
     public void SanitizeAllLevelCrowds() {
         foreach(LevelGenerator level in levels) {

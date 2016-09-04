@@ -33,7 +33,7 @@ public class GameManagerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		SetCrsText();
-		LevelText.text = currentLevel.ToString();
+		LevelText.text = (levelManager.currentLevel + 1).ToString();
 		PeopleText.text = PeopleCount.ToString();
 
         levelManager.Start ();

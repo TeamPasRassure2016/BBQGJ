@@ -10,17 +10,18 @@ public class SpawnCRS : ScriptableObject {
     public int remCops;
 	
 	private bool stop;
-
+	private GameObject instanceCRSRunning;
 	public IEnumerator SpawnLine() {
 
 		stop = false;
+		position = position + 1f * (direction);
+		instanceCRSRunning = Instantiate (prefab, position, Quaternion.LookRotation (direction)) as GameObject;
 		instanceCRSRunning.GetComponent<BoxCollider>().isTrigger = true;
 		instanceCRSRunning.GetComponent<Rigidbody>().velocity = direction*5;
 		instanceCRSRunning.name = "runningCop";
 		instanceCRSRunning.GetComponent<Rigidbody>().useGravity = false;
 		instanceCRSRunning.GetComponent<Animator>().SetTrigger("charge");
 
-		while (gm.CrsCount > 0 && !stop)
         GameObject levelRoot = GameObject.Find("Level");
         while (remCops > 0 && !stop)
 		{
