@@ -12,7 +12,6 @@ public struct Rectangle {
 
 [System.Serializable]
 public struct Circle {
-    [Range(1f, 10f)]
     public float radius;
 }
 
@@ -46,12 +45,10 @@ public class CrowdManager : MonoBehaviour {
         crowdRoot = GameObject.FindGameObjectWithTag (crowdRootTag);
 	}
 
+    // Attempt to create a crowd with the appropriate settings on a best effort basis
+    // aka "give up if the settings are impossible to satisfy"
     public void PopulateCrowd() {
         settingsAreShit = false;
-        PopulateCrowdCoroutine();
-    }
-
-    public void PopulateCrowdCoroutine() {
         if(population > 0) {
             ClearCrowd ();
         }
@@ -64,6 +61,7 @@ public class CrowdManager : MonoBehaviour {
         Debug.Log ("Crowd generation complete!");
     }
 	
+    // Delete all Protesters in the crowd
     public void ClearCrowd() {
         Debug.Log ("Started clearing crowd...");
         for(int i = 0 ; i != protesters.Length ; ++i) {
@@ -76,6 +74,7 @@ public class CrowdManager : MonoBehaviour {
         Debug.Log ("Crowd deletion complete!");
     }
 
+    // Spawn a Protester and store it in the internal array at index idx
     void SpawnProtester(int idx) {
         Vector2 pos = new Vector2();
         int attempt = 0;
@@ -100,6 +99,8 @@ public class CrowdManager : MonoBehaviour {
             }
             ++attempt;
         } while (!CheckSpawnCoords (pos));
+
+        // Actually spawn the Protester
         Protester newProt = GameObject.Instantiate (protesterPrefab, crowdRoot.transform) as Protester;
         newProt.transform.position = Protester.TopVec2ToVec3 (pos) + new Vector3(0, 0.5f, 0);
         protesters [idx] = newProt;

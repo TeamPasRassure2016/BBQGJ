@@ -19,6 +19,7 @@ public class LevelGenerator : ScriptableObject {
     public Protester protesterPrefab;
     public Cop copPrefab;
     public CrowdManager crowdManagerPrefab;
+    [ContextMenuItem("Sane crowd settings", "SanitizeCrowdSettings")]
     public CrowdManager.Params crowdParameters;
     public Shape levelShape;
 
@@ -48,6 +49,7 @@ public class LevelGenerator : ScriptableObject {
         Debug.Log ("Level generation finished");
     }
 
+    // Spawn cops on the border
     void SpawnCops(GameObject root) {
         switch(levelShape) {
         case Shape.Circle:
@@ -82,8 +84,7 @@ public class LevelGenerator : ScriptableObject {
         }
     }
 
-    /* Clear the level by deleting the crowd and the geometry
-     */
+    // Clear the level by deleting the crowd and the geometry
     public void Clear(GameObject root) {
         // Delete the crowd
         GameObject crowdManager = GameObject.FindGameObjectWithTag (CrowdManager.crowdRootTag);
@@ -97,5 +98,13 @@ public class LevelGenerator : ScriptableObject {
         }
 
         Debug.Log ("Cleared level");
+    }
+        
+    // Set sane default values for crowd spawn settings
+    public void SanitizeCrowdSettings() {
+        float maxDistance = Mathf.Min (width, height) - 1f;
+        crowdParameters.circle.radius = maxDistance / 2f;
+        crowdParameters.rectangle.topLeft = new Vector2 (-width/2f + 1f, height/2f - 1f);
+        crowdParameters.rectangle.bottomRight = new Vector2 (width/2f - 1f, -height/2f + 1f);
     }
 }

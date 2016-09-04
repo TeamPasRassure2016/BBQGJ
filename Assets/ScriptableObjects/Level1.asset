@@ -25,8 +25,8 @@ MonoBehaviour:
     crowdShape: 0
     crowdSize: 10
     rectangle:
-      topLeft: {x: 0, y: 0}
-      bottomRight: {x: 0, y: 0}
+      topLeft: {x: -4, y: 4}
+      bottomRight: {x: 4, y: -4}
     circle:
-      radius: 5
+      radius: 4.5
   levelShape: 1

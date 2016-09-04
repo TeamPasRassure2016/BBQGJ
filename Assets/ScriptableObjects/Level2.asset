@@ -22,11 +22,11 @@ MonoBehaviour:
   crowdManagerPrefab: {fileID: 114000011041626578, guid: 0f67cdec46875462ba26512440fe8ead,
     type: 2}
   crowdParameters:
-    crowdShape: 0
+    crowdShape: 1
     crowdSize: 15
     rectangle:
       topLeft: {x: -6, y: 4}
       bottomRight: {x: 6, y: -4}
     circle:
-      radius: 0
+      radius: 1
   levelShape: 1
