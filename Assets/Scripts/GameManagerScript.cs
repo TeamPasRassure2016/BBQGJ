@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour {
 	public float timer;
 
 	private bool mouseDown;
+	private bool validSpawn = false;
 	private Vector2 lastMousePosition;
 	private Vector2 instantiatePosition;
 
@@ -48,16 +49,32 @@ public class GameManagerScript : MonoBehaviour {
 
 			// Timer Update
 			SetTime();
-		
+
 			RaycastHit hit;
 
 			Vector3 pos = Input.mousePosition;
 			pos = Camera.main.ScreenToWorldPoint (pos);
-			Debug.Log (pos);
+			
+			// force la valeur en y pour etre a la hauteur des cops 
+			pos.y = 1f; 
+
+			// cherche tous les obj autour de la pos
+			Collider[] hitColliders = Physics.OverlapSphere(pos, 0.3f); // (pos , rayon de la sphere)
+			
+			// cherche si on a click sur un cop
+			foreach (Collider c in hitColliders)
+			{
+				//Debug.Log(c.gameObject.name);
+				if (c.gameObject.name == "CRS(Clone)" ) {
+					Debug.Log("Valid spawn spot");
+					validSpawn = true; 
+				}
+			}
 
 			if (Physics.Raycast (ray, out hit)) {
-				// ici instantier la colonne de CRS avec pour pts de départ (hit.point.x, 0.5f , hit.point.z)
+				
 				if (!mouseDown) {
+					// la fleche
 					InstantiatedArrow = Instantiate (CRS_Arrow, new Vector3 (hit.point.x, 0.1f, hit.point.z), Quaternion.LookRotation (new Vector3 (0, 1, 0), new Vector3 (1, 0, 0))) as GameObject;
 					mouseDown = true;
 					instantiatePosition = new Vector2 (hit.point.x, hit.point.z);
@@ -76,13 +93,25 @@ public class GameManagerScript : MonoBehaviour {
 		} 
 		if (Input.GetMouseButtonUp (0)) 
 		{
-			GameObject instantiatedController=Instantiate (CRS_Controller) as GameObject;
+			// les CRS
+			// GameObject instantiatedController=Instantiate (CRS_Controller) as GameObject;
 			Vector2 direction = lastMousePosition - instantiatePosition;
 			direction.Normalize ();
-			Vector3 direction3 = new Vector3 (direction.x, 0, direction.y);
-			instantiatedController.GetComponent<Controller_CRS>().Move(new Vector3(instantiatePosition.x,0.5f,instantiatePosition.y), direction3);
-			Object.Destroy (InstantiatedArrow);
+			// Vector3 direction3 = new Vector3 (direction.x, 0, direction.y);
+			//instantiatedController.GetComponent<Controller_CRS>().Move(new Vector3(instantiatePosition.x,0.5f,instantiatePosition.y), direction3);
+			// Object.Destroy (InstantiatedArrow);
 			mouseDown = false;
+
+			if (validSpawn) {
+				SpawnCRS line = (SpawnCRS)ScriptableObject.CreateInstance("SpawnCRS");
+				line.direction = new Vector3 (direction.x, 0, direction.y);
+				line.position = new Vector3(instantiatePosition.x,0.5f,instantiatePosition.y);
+				line.prefab = CRSprefab;
+				line.gm = this;
+				
+				StartCoroutine(line.SpawnLine());
+				validSpawn = false;
+			}
 		}
 
 		// Game Over check
