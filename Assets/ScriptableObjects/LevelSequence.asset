@@ -15,7 +15,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b50c4b136fdf84d41874c01c627374dc, type: 2}
   - {fileID: 11400000, guid: e5bb4e61ed86246c691805f34f6ae508, type: 2}
   - {fileID: 11400000, guid: a4e98ea73b4094340a1d821ac3d47d01, type: 2}
-  protesterPrefab: {fileID: 114000010094236440, guid: 8aed2c60aed1148178bc770a1e02bc4b,
+  protesterPrefab: {fileID: 114000010806924080, guid: 50efe39e6de742d49a74f3e9ae057cc8,
     type: 2}
   copPrefab: {fileID: 114000010905779906, guid: 2c59f2c65a124264b973b79712c0746c,
     type: 2}
