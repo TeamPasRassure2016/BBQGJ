@@ -157,7 +157,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Timer
+  m_Text: T
 --- !u!222 &130056737
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CRS count
+  m_Text: C
 --- !u!222 &486377136
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -561,7 +561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Manifestants
+  m_Text: M
 --- !u!222 &968771694
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -928,7 +928,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level
+  m_Text: L
 --- !u!222 &1463661630
 CanvasRenderer:
   m_ObjectHideFlags: 0
