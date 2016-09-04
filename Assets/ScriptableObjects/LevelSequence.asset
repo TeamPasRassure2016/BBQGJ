@@ -21,5 +21,5 @@ MonoBehaviour:
     type: 2}
   crowdManagerPrefab: {fileID: 114000011041626578, guid: 0f67cdec46875462ba26512440fe8ead,
     type: 2}
-  groundPrefab: {fileID: 114000010527280752, guid: 770f40058a0244feda05acc46a6aef40,
+  groundPrefab: {fileID: 1000010818796470, guid: 770f40058a0244feda05acc46a6aef40,
     type: 2}

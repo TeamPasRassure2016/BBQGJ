@@ -19,7 +19,7 @@ public class LevelGenerator : ScriptableObject {
     public Protester protesterPrefab;
     public Cop copPrefab;
     public CrowdManager crowdManagerPrefab;
-    public Terrain_Trigger groundPrefab;
+    public GameObject groundPrefab;
     [ContextMenuItem("Sane crowd settings", "SanitizeCrowdSettings")]
     public CrowdManager.Params crowdParameters;
     public Shape levelShape;
@@ -28,7 +28,7 @@ public class LevelGenerator : ScriptableObject {
         Debug.Log ("Level generation started");
 
         // Generate the ground plane first
-        Terrain_Trigger plane = (Terrain_Trigger)GameObject.Instantiate(groundPrefab, root.transform);
+		GameObject plane = GameObject.Instantiate(groundPrefab, root.transform) as GameObject;
         plane.transform.localScale = new Vector3 ((float)width / 10f, 1, (float)height / 10f);
         // The ground plane needs a trigger to detect when the cop line goes out of range
         if(levelShape == Shape.Circle) {
