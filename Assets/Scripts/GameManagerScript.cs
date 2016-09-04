@@ -73,7 +73,7 @@ public class GameManagerScript : MonoBehaviour {
 
 			if (Physics.Raycast (ray, out hit)) {
 				
-				if (!mouseDown) {
+				if (!mouseDown && validSpawn) {
 					// la fleche
 					InstantiatedArrow = Instantiate (CRS_Arrow, new Vector3 (hit.point.x, 0.1f, hit.point.z), Quaternion.LookRotation (new Vector3 (0, 1, 0), new Vector3 (1, 0, 0))) as GameObject;
 					mouseDown = true;
