@@ -23,6 +23,8 @@ public class LevelGenerator : ScriptableObject {
     [ContextMenuItem("Sane crowd settings", "SanitizeCrowdSettings")]
     public CrowdManager.Params crowdParameters;
     public Shape levelShape;
+    public float requiredScore;
+    public int nCops;
 
     public void Generate(GameObject root) {
         Debug.Log ("Level generation started");
@@ -117,5 +119,23 @@ public class LevelGenerator : ScriptableObject {
         crowdParameters.circle.radius = maxDistance / 2f;
         crowdParameters.rectangle.topLeft = new Vector2 (-width/2f + 1f, height/2f - 1f);
         crowdParameters.rectangle.bottomRight = new Vector2 (width/2f - 1f, -height/2f + 1f);
+    }
+
+    public float TopY() {
+        if(levelShape == Shape.Circle) {
+            return radius;
+        }
+        else {
+            return height/2f;
+        }
+    }
+
+    public float RightX() {
+        if(levelShape == Shape.Circle) {
+            return radius;
+        }
+        else {
+            return width/2f;
+        }
     }
 }

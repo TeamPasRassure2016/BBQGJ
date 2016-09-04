@@ -174,7 +174,7 @@ GameObject:
   - 114: {fileID: 114000010905779906}
   m_Layer: 0
   m_Name: cop
-  m_TagString: Untagged
+  m_TagString: Cop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

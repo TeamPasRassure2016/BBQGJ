@@ -30,10 +30,10 @@ public class CrowdManager : MonoBehaviour {
     // Public fields
     public Params parameters;
     public Protester protesterPrefab;
+    public Protester[] protesters;
 
     // Private fields
     GameObject crowdRoot;
-    Protester[] protesters;
     const int maxGenAttempts = 30;
     int population = 0;
 

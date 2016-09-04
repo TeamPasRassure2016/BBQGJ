@@ -26,7 +26,7 @@ GameObject:
   - 114: {fileID: 114000010094236440}
   m_Layer: 0
   m_Name: Protester
-  m_TagString: Untagged
+  m_TagString: Protester
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,6 +109,8 @@ MonoBehaviour:
   speed: 1
   directionChangeProbability: 0.5
   moveCycleDuration: 1
+  maxDeviationAngle: 30
+  hotZoneRadius: 3
 --- !u!135 &135000011974923032
 SphereCollider:
   m_ObjectHideFlags: 1

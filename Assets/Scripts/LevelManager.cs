@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour {
 
     // Private fields
     GameObject levelRoot;
-    int currentLevel;
+    public int currentLevel;
 
     void Awake() {
         levelRoot = GameObject.FindGameObjectWithTag (levelRootTag);

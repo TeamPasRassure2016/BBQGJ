@@ -7,15 +7,17 @@ public class SpawnCRS : ScriptableObject {
 	public Vector3 position;
 	public GameObject prefab; //CRS prefab to be spawned
 	public GameManagerScript gm;
+    public int remCops;
 	
 	private bool stop;
 
 	public IEnumerator SpawnLine() {
 
 		stop = false;
-		while (gm.CrsCount > 0 && !stop)
+        GameObject levelRoot = GameObject.Find("Level");
+        while (remCops > 0 && !stop)
 		{
-			GameObject crs = (GameObject)Instantiate (prefab, position, Quaternion.LookRotation(direction));
+            GameObject crs = (GameObject)Instantiate (prefab, position, Quaternion.LookRotation(direction), levelRoot.transform);
 			position = position + 1f * (direction);
 			--gm.CrsCount;
 
@@ -32,6 +34,7 @@ public class SpawnCRS : ScriptableObject {
 			}
 
 			yield return new WaitForSeconds(0.1f);
+            --remCops;
 		}
 		yield return null;
 	}

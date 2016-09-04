@@ -8,6 +8,8 @@ TagManager:
   - LevelRoot
   - CRS_static
   - CRS_controller
+  - Cop
+  - Protester
   layers:
   - Default
   - TransparentFX

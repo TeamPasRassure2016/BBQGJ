@@ -8,8 +8,8 @@ public class GameManagerScript : MonoBehaviour {
 	public Text PeopleText;
 	public Text CrsText;
 	public Text TimerText;
+    public GameObject EndLevelScreen;
 
-	public int currentLevel = 1;
 	public int PeopleCount;
 
 	//public GameObject CRS_Controller;
@@ -28,15 +28,16 @@ public class GameManagerScript : MonoBehaviour {
 	private bool validSpawn = false;
 	private Vector2 lastMousePosition;
 	private Vector2 instantiatePosition;
+    bool scoreScreenDisplayed;
 
 	// Use this for initialization
 	void Start () {
-		CrsCount = 50;
-		SetCrsText();
-		LevelText.text = "Level " + currentLevel.ToString();
+        LevelText.text = "Level " + (levelManager.currentLevel + 1).ToString ();
 		PeopleText.text = "Manifestants : " + PeopleCount.ToString();
 
         levelManager.Start ();
+        CrsCount = levelManager.levelSeq.levels[levelManager.currentLevel].nCops;
+        SetCrsText();
 	}
 	
 	// Update is called once per frame
@@ -108,6 +109,7 @@ public class GameManagerScript : MonoBehaviour {
 				line.position = new Vector3(instantiatePosition.x,0.5f,instantiatePosition.y);
 				line.prefab = CRSprefab;
 				line.gm = this;
+                line.remCops = CrsCount;
 				
 				StartCoroutine(line.SpawnLine());
 				validSpawn = false;
@@ -116,11 +118,31 @@ public class GameManagerScript : MonoBehaviour {
 		}
 
 		// Game Over check
-		if (CrsCount == 0) {
-			GameOver();
+        if (CrsCount == 0 && !scoreScreenDisplayed) {
+            float score = ScoreManager.Eval (levelManager.levelSeq.levels [levelManager.currentLevel]);
+            scoreScreenDisplayed = true;
+            if(score < levelManager.levelSeq.levels[levelManager.currentLevel].requiredScore) {
+                GameOver(score);
+            }
+            else {
+                Text[] EndLevelTexts = EndLevelScreen.GetComponentsInChildren<Text> ();
+                foreach(Text t in EndLevelTexts) {
+                    if(t.name == "ScoreText") {
+                        t.text = "Score: " + score + "\n" +
+                            "Required score: " + levelManager.levelSeq.levels[levelManager.currentLevel].requiredScore;
+                    }
+                }
+                EndLevelScreen.SetActive (true);
+            }
 		}
-
 	}
+
+    public void LoadNextLevel() {
+        scoreScreenDisplayed = false;
+        EndLevelScreen.SetActive (false);
+        levelManager.NextLevel ();
+        CrsCount = levelManager.levelSeq.levels [levelManager.currentLevel].nCops;
+    }
 
 	void SetCrsText (){
 		CrsText.text = "CRS restants : " + CrsCount.ToString();
@@ -135,8 +157,12 @@ public class GameManagerScript : MonoBehaviour {
 		TimerText.text = string.Format ("{0:00} : {1:00}", minutes, seconds);
 	}
 
-	void GameOver() {
+    void GameOver(float score) {
 		GOScreen.SetActive(true);
+        GOScreen.GetComponentInChildren<Text>().text = 
+            "You lose.\n" + 
+            "Score: " + score + "\n" +
+            "Required score: " + levelManager.levelSeq.levels[levelManager.currentLevel].requiredScore;
 	}
 
 }
