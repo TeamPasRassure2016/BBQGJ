@@ -31,6 +31,7 @@ MonoBehaviour:
       bottomRight: {x: 4, y: -4}
     circle:
       radius: 4.5
+    hotZoneRadius: 3
   levelShape: 1
   requiredScore: 50
   nCops: 30
