@@ -31,6 +31,7 @@ MonoBehaviour:
       bottomRight: {x: 4, y: -4}
     circle:
       radius: 4.5
+    hotZoneRadius: 3
     SwapColor:
     - {fileID: 2100000, guid: 43c70de77b01d8040960da8837fc9541, type: 2}
     - {fileID: 2100000, guid: 41a29d3115fe692438e313a47668e2a1, type: 2}

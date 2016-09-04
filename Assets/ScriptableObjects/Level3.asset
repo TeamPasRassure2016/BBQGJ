@@ -32,5 +32,5 @@ MonoBehaviour:
     circle:
       radius: 0
   levelShape: 1
-  requiredScore: 75
-  nCops: 50
+  requiredScore: 42
+  nCops: 100

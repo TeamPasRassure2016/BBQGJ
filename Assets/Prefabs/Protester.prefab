@@ -758,7 +758,7 @@ MonoBehaviour:
   directionChangeProbability: 0.5
   moveCycleDuration: 1
   maxDeviationAngle: 30
-  hotZoneRadius: 3
+  hotZoneRadius: 6
 --- !u!135 &135000011896995414
 SphereCollider:
   m_ObjectHideFlags: 1
