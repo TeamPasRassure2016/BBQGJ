@@ -84,14 +84,17 @@ public class LevelGenerator : ScriptableObject {
                 Cop copTop = (Cop)GameObject.Instantiate (copPrefab, root.transform),
                     copBot = (Cop)GameObject.Instantiate (copPrefab, root.transform);
                 copTop.transform.position = new Vector3 (-x + i * copDistance, 0.5f, y);
+                copTop.transform.rotation = Quaternion.Euler(0, 180, 0);
                 copBot.transform.position = new Vector3 (-x + i * copDistance, 0.5f, -y);
             }
 
             // Then, the vertical ones
-            for(int i = 0 ; i != nCopsY ; ++i) {
+            for(int i = 1 ; i != nCopsY ; ++i) {
                 Cop copL = (Cop)GameObject.Instantiate (copPrefab, root.transform),
                     copR = (Cop)GameObject.Instantiate (copPrefab, root.transform);
+                copL.transform.rotation = Quaternion.Euler(0, 90, 0);
                 copL.transform.position = new Vector3 (-x, 0.5f, -y + i * copDistance);
+                copR.transform.rotation = Quaternion.Euler(0, -90, 0);
                 copR.transform.position = new Vector3 ( x, 0.5f, -y + i * copDistance);
             }
             break;
