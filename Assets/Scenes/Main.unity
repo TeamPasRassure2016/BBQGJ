@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692522, g: 0.49678677, b: 0.5750848, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &130056734
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +350,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &486377133
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +671,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1312097955}
   - 82: {fileID: 1312097956}
+  - 114: {fileID: 1312097957}
   m_Layer: 0
   m_Name: Audio Source (pin pon)
   m_TagString: Untagged
@@ -765,6 +766,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1312097957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1312097954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4893dbe35a0924d93a00be8aef60a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1322292198
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +864,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 90
-  orthographic: 0
+  orthographic: 1
   orthographic size: 6
   m_Depth: -1
   m_CullingMask:
@@ -1053,7 +1065,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011713182298, guid: 2ec3b4c054aa0438a852bf815c286f86, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000012326247946, guid: 2ec3b4c054aa0438a852bf815c286f86,
         type: 2}
