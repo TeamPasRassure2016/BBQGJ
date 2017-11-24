@@ -1,28 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 
 public class StartOptions : MonoBehaviour {
 
+	public int sceneToStart = 1;									//Index number in build settings of scene to load if changeScenes is true
+	public bool changeScenes;										//If true, load a new scene when Start is pressed, if false, fade out UI and continue in single scene
+	public bool changeMusicOnStart;									//Choose whether to continue playing menu music or start a new music clip
+	public AnimationClip fadeColorAnimationClip;					//Animation clip fading to color (black default) when changing scenes
 
+	[HideInInspector] public bool inMainMenu = true;				//If true, pause button disabled in main menu (Cancel in input manager, default escape key)
+	[HideInInspector] public Animator animColorFade; 				//Reference to animator which will fade to and from black when starting game.
+	[HideInInspector] public Animator animMenuAlpha;				//Reference to animator that will fade out alpha of MenuPanel canvas group
+	[HideInInspector] public AnimationClip fadeAlphaAnimationClip;	//Animation clip fading out UI elements alpha
 
-	public int sceneToStart = 1;										//Index number in build settings of scene to load if changeScenes is true
-	public bool changeScenes;											//If true, load a new scene when Start is pressed, if false, fade out UI and continue in single scene
-	public bool changeMusicOnStart;										//Choose whether to continue playing menu music or start a new music clip
-
-
-	[HideInInspector] public bool inMainMenu = true;					//If true, pause button disabled in main menu (Cancel in input manager, default escape key)
-	[HideInInspector] public Animator animColorFade; 					//Reference to animator which will fade to and from black when starting game.
-	[HideInInspector] public Animator animMenuAlpha;					//Reference to animator that will fade out alpha of MenuPanel canvas group
-	 public AnimationClip fadeColorAnimationClip;		//Animation clip fading to color (black default) when changing scenes
-	[HideInInspector] public AnimationClip fadeAlphaAnimationClip;		//Animation clip fading out UI elements alpha
-
-
-	private PlayMusic playMusic;										//Reference to PlayMusic script
-	private float fastFadeIn = .01f;									//Very short fade time (10 milliseconds) to start playing music immediately without a click/glitch
-	private ShowPanels showPanels;										//Reference to ShowPanels script on UI GameObject, to show and hide panels
+	private PlayMusic playMusic;									//Reference to PlayMusic script
+	private float fastFadeIn = .01f;								//Very short fade time (10 milliseconds) to start playing music immediately without a click/glitch
+	private ShowPanels showPanels;									//Reference to ShowPanels script on UI GameObject, to show and hide panels
 
 	
 	void Awake()

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [CreateAssetMenu(menuName = "Custom/Level Generator")]
 public class LevelGenerator : ScriptableObject {
@@ -44,8 +43,14 @@ public class LevelGenerator : ScriptableObject {
             coll.isTrigger = true;
         }
 
-        // Add a crowd manager and generate the crowd
-        CrowdManager crowdManager = (CrowdManager)GameObject.Instantiate (crowdManagerPrefab, root.transform);
+        GameObject crowdManagerObj = GameObject.FindGameObjectWithTag (CrowdManager.crowdRootTag);
+        CrowdManager crowdManager;
+        if (crowdManagerObj != null)
+            crowdManager = crowdManagerObj.GetComponent<CrowdManager>();
+        else 
+            // Add a crowd manager and generate the crowd
+            crowdManager = (CrowdManager)GameObject.Instantiate (crowdManagerPrefab, root.transform);
+        
         crowdManager.parameters = crowdParameters;
         crowdManager.protesterPrefab = protesterPrefab;
         crowdManager.PopulateCrowd ();
@@ -113,7 +118,7 @@ public class LevelGenerator : ScriptableObject {
             if(t.tag != CrowdManager.crowdRootTag)
                 GameObject.Destroy (t.gameObject);
         }
-
+        
         Debug.Log ("Cleared level");
     }
         

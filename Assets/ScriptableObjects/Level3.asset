@@ -31,6 +31,11 @@ MonoBehaviour:
       bottomRight: {x: 12, y: -9}
     circle:
       radius: 0
+    SwapColor:
+    - {fileID: 2100000, guid: 43c70de77b01d8040960da8837fc9541, type: 2}
+    - {fileID: 2100000, guid: 41a29d3115fe692438e313a47668e2a1, type: 2}
+    - {fileID: 2100000, guid: 1f0f574d6864015429bc5c30b39d7f4c, type: 2}
+    - {fileID: 2100000, guid: a5767a966eb97784ba47174b84b66c95, type: 2}
   levelShape: 1
   requiredScore: 42
   nCops: 100

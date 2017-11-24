@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 340a51885c22e46af85f548f89aa3573
-timeCreated: 1472919631
+timeCreated: 1511552914
 licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - protesterPrefab: {fileID: 114000010806924080, guid: 50efe39e6de742d49a74f3e9ae057cc8,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

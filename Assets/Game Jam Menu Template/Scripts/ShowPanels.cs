@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class ShowPanels : MonoBehaviour {
 
-	public GameObject optionsPanel;							//Store a reference to the Game Object OptionsPanel 
-	public GameObject optionsTint;							//Store a reference to the Game Object OptionsTint 
-	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
-    public GameObject creditsPanel;                         //Store a reference to the Game Object CreditsPanel
-	public GameObject pausePanel;							//Store a reference to the Game Object PausePanel 
+	public GameObject optionsPanel;		//Store a reference to the Game Object OptionsPanel 
+	public GameObject optionsTint;		//Store a reference to the Game Object OptionsTint 
+	public GameObject menuPanel;		//Store a reference to the Game Object MenuPanel 
+    public GameObject creditsPanel;     //Store a reference to the Game Object CreditsPanel
+	public GameObject pausePanel;		//Store a reference to the Game Object PausePanel 
 
 
 	//Call this function to activate and display the Options panel during the main menu
@@ -62,6 +61,5 @@ public class ShowPanels : MonoBehaviour {
 	{
 		pausePanel.SetActive (false);
 		optionsTint.SetActive(false);
-
 	}
 }

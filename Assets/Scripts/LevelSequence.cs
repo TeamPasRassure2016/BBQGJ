@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
 
 [CreateAssetMenu(menuName = "Custom/Level Sequence")]
 public class LevelSequence : ScriptableObject {

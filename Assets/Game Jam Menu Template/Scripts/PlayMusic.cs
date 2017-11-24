@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class PlayMusic : MonoBehaviour {
 
 
-	public AudioClip titleMusic;					//Assign Audioclip for title music loop
-	public AudioClip mainMusic;						//Assign Audioclip for main 
-	public AudioMixerSnapshot volumeDown;			//Reference to Audio mixer snapshot in which the master volume of main mixer is turned down
-	public AudioMixerSnapshot volumeUp;				//Reference to Audio mixer snapshot in which the master volume of main mixer is turned up
+	public AudioClip titleMusic;			//Assign Audioclip for title music loop
+	public AudioClip mainMusic;				//Assign Audioclip for main 
+	public AudioMixerSnapshot volumeDown;	//Reference to Audio mixer snapshot in which the master volume of main mixer is turned down
+	public AudioMixerSnapshot volumeUp;		//Reference to Audio mixer snapshot in which the master volume of main mixer is turned up
 
 
-	private AudioSource musicSource;				//Reference to the AudioSource which plays music
-	private float resetTime = .01f;					//Very short time used to fade in near instantly without a click
+	private AudioSource musicSource;		//Reference to the AudioSource which plays music
+	private float resetTime = .01f;			//Very short time used to fade in near instantly without a click
 
 
 	void Awake () 
@@ -47,7 +46,6 @@ public class PlayMusic : MonoBehaviour {
 	//Used if running the game in a single scene, takes an integer music source allowing you to choose a clip by number and play.
 	public void PlaySelectedMusic(int musicChoice)
 	{
-
 		//This switch looks at the integer parameter musicChoice to decide which music clip to play.
 		switch (musicChoice) 
 		{
