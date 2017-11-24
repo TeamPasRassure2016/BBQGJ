@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 7786928c9b9234a419fb7dace21fea66
+timeCreated: 1511552790
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - protesterPrefab: {fileID: 114000010806924080, guid: 50efe39e6de742d49a74f3e9ae057cc8,
+      type: 2}
+  - copPrefab: {fileID: 114000010905779906, guid: 2c59f2c65a124264b973b79712c0746c,
+      type: 2}
+  - crowdManagerPrefab: {fileID: 114000011041626578, guid: 0f67cdec46875462ba26512440fe8ead,
+      type: 2}
+  - groundPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
